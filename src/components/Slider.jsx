@@ -26,8 +26,8 @@ const Arrow = styled.div`
   top: 0;
   bottom: 0;
   margin:auto;
-  left: ${(props) =>  props.direction ===  'left-btn' && '10px'};
-  right: ${(props) =>  props.direction ===  'right-btn' && '10px'};
+  left: ${(props) =>  props.direction ===  'left' && '10px'};
+  right: ${(props) =>  props.direction ===  'right' && '10px'};
   cursor: pointer;
   opacity: 0.5;
   z-index: 2;
@@ -36,7 +36,8 @@ const Wrapper =  styled.div`
   height: 100%;
   display: flex;
   transition: all 1.5s ease;
-  transform: translateX(${(props) => props.slideIndex * -100}vw);
+  /* transform: translateX(0vw -> -100vw -> -200vw -> 0vw ...); */
+  transform: translateX(${({slideIndex}) => slideIndex * -100}vw);
 `
 const Slide =  styled.div`
   width: 100vw;
@@ -48,29 +49,30 @@ const Slide =  styled.div`
 
 
 const ImgContainer =  styled.div`
-  flex: 1;
-  height: 100%;
-
+  height: 80%;
+  width: 80%;
+  flex: 2;
 `
 const Img = styled.img`
-
-  height: 80%;
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
 
 `
 // 타이틀 + 설명 + 버튼 
 const InfoContainer =  styled.div`
-
-  flex: 1;
-  padding: 80px;
+  padding: 50px;
   z-index: 1;
+  flex : 1;
 `
-const Title =  styled.h1`
+const Title =  styled.h2`
   font-size: 70px;
+  font-weight: 600;
 `
 const Desc = styled.p`
-  margin: 40px 0px;
+  margin: 50px 0px;
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: 3px;
 `
 const Button =  styled.button`
@@ -85,23 +87,24 @@ const Button =  styled.button`
 function Slider() {
 
   const [slideIndex , setSlideIndex] = useState(0);
-
   const handClick =  (direaction)=>{
-    if(direaction === 'left-btn'){
-      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2)
-    }else {
-      setSlideIndex(slideIndex < 2 ?  slideIndex + 1 : 0)
+    
+    if(direaction === 'left'){
+      // console.log(slideIndex);
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : sliderItems.length - 1)
+    }else if(direaction === 'right'){
+      // console.log(slideIndex);
+      setSlideIndex(slideIndex < sliderItems.length - 1  ?  slideIndex + 1 : 0)
     }
   }
   return (
     <Container>
-      <Arrow direction='left-btn'  onClink={()=> handClick('left')}>
+      <Arrow direction='left' onClick={()=> handClick('left')}>
         <BsArrowLeftShort/>
       </Arrow>
       <Wrapper slideIndex = {slideIndex}>
         {sliderItems.map((slide)=>(
-  
-            <Slide bg={slide.bg}>
+            <Slide key ={slide.id}>
               <ImgContainer>
                 <Img src={slide.img}></Img>
               </ImgContainer>
@@ -110,10 +113,10 @@ function Slider() {
                 <Desc>{slide.desc}</Desc>
                 <Button>Show Now</Button>
               </InfoContainer>
-          </Slide>
+            </Slide>
         ))}
       </Wrapper>
-      <Arrow  direction='right-btn'  onClink={()=> handClick('right')}>
+      <Arrow  direction='right'  onClick={()=> handClick('right')}>
         <BsArrowRightShort/>
         </Arrow>
     </Container>
