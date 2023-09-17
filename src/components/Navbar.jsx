@@ -4,15 +4,21 @@ import { CiSearch} from 'react-icons/ci';
 import {BsCart} from 'react-icons/bs'
 
 
-
 const Wrapper =  styled.div`
-  padding:  30px 60px;
+  padding: 10px 60px;
+  position: sticky; /* 화면 상단에 고정하기 위해 position: fixed;를 추가합니다. */
+  top: 0; /* 화면 상단에 고정됩니다. */
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #cccbcb;
+  height: 60px;
+  background-color: #fff; /* 네비게이션 바의 배경색 설정 */
+  z-index: 1000; /* 다른 요소 위에 나타나도록 설정 */
+
 `
-//  왼쪽 언어, 검색창
+//  왼쪽 언어 , 검색창
 const Left = styled.div`
   flex: 1;
   display: flex;
@@ -57,30 +63,32 @@ const MenuItem =  styled.div`
 `
 function Navbar() {
   return (
- 
-      <Wrapper>
-        <Left>
-          <Lenguage>KO</Lenguage>
-          <SearchBox>
-            <SearchContainer/>
-            <CiSearch size={20}/>
-          </SearchBox>
-        </Left>
-        <Center>
-          <Logo>COCO MALL</Logo>
-        </Center>
-        <Right>
-          <MenuItem>
-            LOGIN
-          </MenuItem>
-          <MenuItem>
-                JOIN
-          </MenuItem>
-          <MenuItem>
-            <BsCart size={25}/>
-          </MenuItem>
-        </Right>
-      </Wrapper>
+
+   
+        <Wrapper>
+          <Left>
+            <Lenguage>KO</Lenguage>
+            <SearchBox>
+              <SearchContainer/>
+              <CiSearch size={20}/>
+            </SearchBox>
+          </Left>
+          <Center>
+            <Logo>COCO MALL</Logo>
+          </Center>
+          <Right>
+            <MenuItem>
+              LOGIN
+            </MenuItem>
+            <MenuItem>
+                  JOIN
+            </MenuItem>
+            <MenuItem>
+              <BsCart size={25}/>
+            </MenuItem>
+          </Right>
+        </Wrapper>
+
 
   )
 }

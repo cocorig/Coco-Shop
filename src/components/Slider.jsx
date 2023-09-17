@@ -9,6 +9,7 @@ const Container =  styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
+
 `
 //  슬라이드 버튼
 const Arrow = styled.div`
@@ -26,8 +27,8 @@ const Arrow = styled.div`
   top: 0;
   bottom: 0;
   margin:auto;
-  left: ${(props) =>  props.direction ===  'left' && '10px'};
-  right: ${(props) =>  props.direction ===  'right' && '10px'};
+  left: ${(props) =>  props.direction ===  'left' && '20px'};
+  right: ${(props) =>  props.direction ===  'right' && '20px'};
   cursor: pointer;
   opacity: 0.5;
   z-index: 2;
@@ -44,13 +45,11 @@ const Slide =  styled.div`
   height: 100vh;
   display:  flex;
   align-items: center;
-  background-color: ${(props) => props.bg};
+  /* background-color: ${(props) => props.bg}; */
 `
 
-
 const ImgContainer =  styled.div`
-  height: 80%;
-  width: 80%;
+  height: 100%;
   flex: 2;
 `
 const Img = styled.img`
@@ -63,7 +62,7 @@ const Img = styled.img`
 const InfoContainer =  styled.div`
   padding: 50px;
   z-index: 1;
-  flex : 1;
+  flex : 1.5;
 `
 const Title =  styled.h2`
   font-size: 70px;
